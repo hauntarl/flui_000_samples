@@ -6,4 +6,13 @@ import './collapsable_side_bar/side_bar_page.dart';
 
 // void main() => runApp(GoogleIOFilter());
 // void main() => runApp(CustomPainterDemo());
-void main() => runApp(SideBarPage());
+void main() {
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: SideBarPage(),
+      ),
+    ),
+  );
+}
