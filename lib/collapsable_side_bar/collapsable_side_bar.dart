@@ -28,7 +28,7 @@ class CollapsableSideBar extends StatefulWidget {
     this.unselectedTextColor = const Color(0xffC0C7D0),
     this.dropdownButtonColor = const Color(0xff30383F),
     this.duration = const Duration(milliseconds: 500),
-    this.curve = Curves.fastOutSlowIn,
+    this.curve = Curves.easeInOut,
   });
 
   final String avatarUrl, name;
