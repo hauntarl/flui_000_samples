@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
-import './collapsable_side_bar.dart';
+import './collapsible_side_bar.dart';
 import './item.dart';
 
 class SideBarPage extends StatefulWidget {
@@ -56,7 +56,7 @@ class _SideBarPageState extends State<SideBarPage> {
   }
 
   Widget _sideBar(BuildContext context, double width) {
-    return CollapsableSideBar(
+    return CollapsibleSideBar(
       maxWidth: width * 0.75,
       items: _items,
       avatarUrl: _avatarUrl,

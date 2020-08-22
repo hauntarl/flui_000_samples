@@ -2,12 +2,12 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import './item.dart';
-import './item_widget.dart';
-import './avatar.dart';
+import 'item.dart';
+import 'item_widget.dart';
+import 'avatar.dart';
 
-class CollapsableSideBar extends StatefulWidget {
-  const CollapsableSideBar({
+class CollapsibleSideBar extends StatefulWidget {
+  const CollapsibleSideBar({
     @required this.items,
     this.name = 'Lorem Ipsum',
     this.avatarUrl,
@@ -52,10 +52,10 @@ class CollapsableSideBar extends StatefulWidget {
   final Curve curve;
 
   @override
-  _CollapsableSideBarState createState() => _CollapsableSideBarState();
+  _CollapsibleSideBarState createState() => _CollapsibleSideBarState();
 }
 
-class _CollapsableSideBarState extends State<CollapsableSideBar>
+class _CollapsibleSideBarState extends State<CollapsibleSideBar>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _widthAnimation;
