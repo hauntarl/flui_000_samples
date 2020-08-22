@@ -28,7 +28,7 @@ class CollapsableSideBar extends StatefulWidget {
     this.unselectedTextColor = const Color(0xffC0C7D0),
     this.dropdownButtonColor = const Color(0xff30383F),
     this.duration = const Duration(milliseconds: 500),
-    this.curve = Curves.easeInOut,
+    this.curve = Curves.fastLinearToSlowEaseIn,
   });
 
   final String avatarUrl, name;
@@ -62,7 +62,7 @@ class _CollapsableSideBarState extends State<CollapsableSideBar>
   CurvedAnimation _curve;
 
   var _isCollapsed = true;
-  double _currWidth, _delta, _deltaBy2, _maxOffset;
+  double _currWidth, _delta, _delta1By4, _delta3by4, _maxOffset;
   int _selectedItemIndex;
 
   @override
@@ -70,7 +70,8 @@ class _CollapsableSideBarState extends State<CollapsableSideBar>
     super.initState();
     _currWidth = widget.minWidth;
     _delta = widget.maxWidth - widget.minWidth;
-    _deltaBy2 = _delta / 2;
+    _delta1By4 = _delta * 0.25;
+    _delta3by4 = _delta * 0.75;
     _maxOffset = widget.padding * 2 + widget.iconSize;
     for (var i = 0; i < widget.items.length; i++) {
       if (widget.items[i].isSelected) {
@@ -127,7 +128,8 @@ class _CollapsableSideBarState extends State<CollapsableSideBar>
       setState(() => _isCollapsed = true);
       return;
     }
-    var endWidth = _currWidth - widget.minWidth > _deltaBy2
+    var threshold = _isCollapsed ? _delta1By4 : _delta3by4;
+    var endWidth = _currWidth - widget.minWidth > threshold
         ? widget.maxWidth
         : widget.minWidth;
     _animateTo(endWidth);
@@ -259,7 +261,7 @@ class _CollapsableSideBarState extends State<CollapsableSideBar>
   TextStyle _textStyle(Color color) {
     return TextStyle(
       fontSize: widget.textSize,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w600,
       color: color,
     );
   }
