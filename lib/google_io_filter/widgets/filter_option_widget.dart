@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class FilterOption extends StatefulWidget {
   const FilterOption({
-    @required this.filterText,
-    @required this.duration,
+    required this.filterText,
+    required this.duration,
     this.curve = Curves.easeInOut,
     this.filterColor = Colors.blue,
     this.backgroundColor = Colors.white,
@@ -17,7 +17,7 @@ class FilterOption extends StatefulWidget {
     this.borderRadius = 25,
     this.borderWidth = 1,
     this.isSelected = false,
-    this.onTap,
+    required this.onTap,
   });
 
   final String filterText;
@@ -44,16 +44,16 @@ class FilterOption extends StatefulWidget {
 class _FilterOptionState extends State<FilterOption>
     with SingleTickerProviderStateMixin {
   final _parentContainer = GlobalKey(debugLabel: 'parent container');
-  RenderBox _renderBox;
+  RenderBox? _renderBox;
 
-  AnimationController _animationController;
-  Animation<double> _textShiftAnimation;
-  Animation<double> _iconScaleAnimation;
-  Animation<double> _fillHeightAnimation;
-  Animation<double> _paddingAnimation;
-  Animation<Color> _textColorAnimation;
+  late AnimationController _animationController;
+  late Animation<double> _textShiftAnimation;
+  late Animation<double> _iconScaleAnimation;
+  late Animation<double> _fillHeightAnimation;
+  late Animation<double> _paddingAnimation;
+  late Animation<Color?> _textColorAnimation;
 
-  bool _isSelected;
+  late bool _isSelected;
 
   @override
   void initState() {
@@ -107,9 +107,10 @@ class _FilterOptionState extends State<FilterOption>
   }
 
   Animation<double> get _fillWidthAnimation {
-    _renderBox = _parentContainer.currentContext.findRenderObject();
+    _renderBox =
+        _parentContainer.currentContext!.findRenderObject() as RenderBox?;
     var width =
-        _renderBox != null ? _renderBox.size.width : widget.filterDotDiameter;
+        _renderBox != null ? _renderBox!.size.width : widget.filterDotDiameter;
     return Tween<double>(
       begin: widget.filterDotDiameter,
       end: width,
@@ -154,7 +155,7 @@ class _FilterOptionState extends State<FilterOption>
             }
             setState(() {
               _isSelected = !_isSelected;
-              if (widget.onTap != null) widget.onTap(_isSelected);
+              widget.onTap(_isSelected);
             });
           },
           child: Stack(
