@@ -1,33 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 const bgColor = Color(0xFF652A78);
 const red = Color(0xFFDE3C10);
 const purple = Color(0xFF8132AD);
 const cyan = Color(0xFF99D5E5);
 const orange = Color(0xFFE97A4D);
-
-class CustomPainterDemo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      systemNavigationBarColor: Theme.of(context).canvasColor,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    ));
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: CustomPaint(
-          painter: Painter(),
-          child: Container(
-            height: 500,
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class Painter extends CustomPainter {
   @override

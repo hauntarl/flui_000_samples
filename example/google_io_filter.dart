@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_samples/google_io_filter/filter_option.dart';
 
-import './widgets/filter_option_widget.dart';
+void main() => runApp(GoogleIOFilter());
 
 class GoogleIOFilter extends StatelessWidget {
   @override
