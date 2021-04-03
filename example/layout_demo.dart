@@ -10,8 +10,7 @@ class LayoutDemo extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: Colors.transparent,
-      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.white,
     ));
     final title = Padding(
       padding: const EdgeInsets.all(16),
@@ -66,6 +65,7 @@ class LayoutDemo extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter layout demo',
       home: Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
