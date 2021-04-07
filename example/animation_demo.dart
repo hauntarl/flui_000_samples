@@ -27,9 +27,8 @@ class AnimationDemo extends StatelessWidget {
             AnimateSize(),
             AnimateOpacity(),
             AnimateRotation(),
-            LayoutBuilder(builder: (context, _) {
-              final width = MediaQuery.of(context).size.width;
-              return AnimateAll(maxWidth: width);
+            LayoutBuilder(builder: (context, constraint) {
+              return AnimateAll(maxWidth: constraint.maxWidth);
             }),
           ],
         ),
