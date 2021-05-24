@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_samples/custom_painter/painter.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_samples/custom_route/custom_route.dart';
+import 'package:flutter_samples/custom_route/layout_demo.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -13,28 +14,20 @@ void main() {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.white,
+    ));
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: ElevatedButton(
           onPressed: () => Navigator.of(context).push(CustomRoute(
             parent: this,
-            child: NextPage(),
+            child: LayoutDemo(),
           )),
           child: Text('Go!'),
-        ),
-      ),
-    );
-  }
-}
-
-class NextPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomPaint(
-        painter: Painter(),
-        child: Container(
-          height: 700,
         ),
       ),
     );
