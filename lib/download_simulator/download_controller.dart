@@ -35,7 +35,7 @@ class SimulatedDownloadController extends DownloadController
   DownloadStatus _status;
   double _progress;
   VoidCallback _onOpen; // action performed after download is ready
-  final _pauses = _random.nextInt(5);
+  final _pauses = _random.nextInt(5) + 2;
 
   @override
   DownloadStatus get status => _status;
