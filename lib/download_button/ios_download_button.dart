@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../download_simulator/download_controller.dart' show DownloadStatus;
 
-class IOSDownloadButton extends StatefulWidget {
+class IOSDownloadButton extends StatelessWidget {
   static const bgColor = Color(0xffE6E6EC);
   static const textColor = Color(0xff87BBF3);
 
@@ -21,27 +21,22 @@ class IOSDownloadButton extends StatefulWidget {
     this.transitionDuration = const Duration(milliseconds: 500),
   }) : super(key: key);
 
-  @override
-  _IOSDownloadButtonState createState() => _IOSDownloadButtonState();
-}
-
-class _IOSDownloadButtonState extends State<IOSDownloadButton> {
-  bool get _isPreparing => widget.status == DownloadStatus.preparing;
-  bool get _isFetching => widget.status == DownloadStatus.fetching;
-  bool get _isDownloaded => widget.status == DownloadStatus.downloaded;
+  bool get _isPreparing => status == DownloadStatus.preparing;
+  bool get _isFetching => status == DownloadStatus.fetching;
+  bool get _isDownloaded => status == DownloadStatus.downloaded;
 
   void _onPressed() {
-    switch (widget.status) {
+    switch (status) {
       case DownloadStatus.cancelled:
-        widget.onStart();
+        onStart();
         break;
       case DownloadStatus.preparing:
         break;
       case DownloadStatus.fetching:
-        widget.onCancel();
+        onCancel();
         break;
       case DownloadStatus.downloaded:
-        widget.onOpen();
+        onOpen();
         break;
     }
   }
@@ -61,7 +56,7 @@ class _IOSDownloadButtonState extends State<IOSDownloadButton> {
 
   Widget _buildButton({required Widget child}) {
     return AnimatedContainer(
-      duration: widget.transitionDuration,
+      duration: transitionDuration,
       curve: Curves.fastOutSlowIn,
       child: child,
       width: double.infinity,
@@ -81,7 +76,7 @@ class _IOSDownloadButtonState extends State<IOSDownloadButton> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: AnimatedOpacity(
-        duration: widget.transitionDuration,
+        duration: transitionDuration,
         opacity: _isPreparing || _isFetching ? 0 : 1,
         curve: Curves.easeOut,
         child: Text(
@@ -99,7 +94,7 @@ class _IOSDownloadButtonState extends State<IOSDownloadButton> {
   Widget _buildDownloadingProgress() {
     return Positioned.fill(
       child: AnimatedOpacity(
-        duration: widget.transitionDuration,
+        duration: transitionDuration,
         curve: Curves.easeOut,
         opacity: _isPreparing || _isFetching ? 1 : 0,
         child: Stack(
@@ -122,7 +117,7 @@ class _IOSDownloadButtonState extends State<IOSDownloadButton> {
     return AspectRatio(
       aspectRatio: 1,
       child: TweenAnimationBuilder<double>(
-        tween: Tween(begin: 0.0, end: widget.progress),
+        tween: Tween(begin: 0.0, end: progress),
         duration: const Duration(milliseconds: 500),
         curve: Curves.fastLinearToSlowEaseIn,
         builder: (_, value, child) {
