@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_samples/download_button/download_button.dart';
+import 'package:flutter_samples/download_button/ios_download_button.dart';
 import 'package:flutter_samples/download_simulator/download_controller.dart';
 
 void main() => runApp(HomePage());
@@ -99,7 +99,7 @@ class _ApplistState extends State<Applist> {
           print('${controller.status}: ${controller.progress}');
           return SizedBox(
             width: 96,
-            child: DownloadButton(
+            child: IOSDownloadButton(
               status: controller.status,
               progress: controller.progress,
               onStart: controller.start,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../download_simulator/download_controller.dart' show DownloadStatus;
 
-class DownloadButton extends StatefulWidget {
+class IOSDownloadButton extends StatefulWidget {
   static const bgColor = Color(0xffE6E6EC);
   static const textColor = Color(0xff87BBF3);
 
@@ -11,7 +11,7 @@ class DownloadButton extends StatefulWidget {
   final double progress;
   final VoidCallback onStart, onCancel, onOpen;
 
-  const DownloadButton({
+  const IOSDownloadButton({
     Key? key,
     required this.status,
     required this.onStart,
@@ -22,10 +22,10 @@ class DownloadButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _DownloadButtonState createState() => _DownloadButtonState();
+  _IOSDownloadButtonState createState() => _IOSDownloadButtonState();
 }
 
-class _DownloadButtonState extends State<DownloadButton> {
+class _IOSDownloadButtonState extends State<IOSDownloadButton> {
   bool get _isPreparing => widget.status == DownloadStatus.preparing;
   bool get _isFetching => widget.status == DownloadStatus.fetching;
   bool get _isDownloaded => widget.status == DownloadStatus.downloaded;
@@ -72,7 +72,7 @@ class _DownloadButtonState extends State<DownloadButton> {
             )
           : const ShapeDecoration(
               shape: StadiumBorder(),
-              color: DownloadButton.bgColor,
+              color: IOSDownloadButton.bgColor,
             ),
     );
   }
@@ -88,7 +88,7 @@ class _DownloadButtonState extends State<DownloadButton> {
           _isDownloaded ? 'OPEN' : 'GET',
           textAlign: TextAlign.center,
           style: const TextStyle(
-            color: DownloadButton.textColor,
+            color: IOSDownloadButton.textColor,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -110,7 +110,7 @@ class _DownloadButtonState extends State<DownloadButton> {
               const Icon(
                 Icons.stop,
                 size: 14,
-                color: DownloadButton.textColor,
+                color: IOSDownloadButton.textColor,
               ),
           ],
         ),
@@ -129,10 +129,10 @@ class _DownloadButtonState extends State<DownloadButton> {
           return CircularProgressIndicator(
             strokeWidth: 2,
             backgroundColor:
-                _isFetching ? DownloadButton.bgColor : Colors.transparent,
+                _isFetching ? IOSDownloadButton.bgColor : Colors.transparent,
             valueColor: AlwaysStoppedAnimation(_isPreparing
-                ? DownloadButton.bgColor
-                : DownloadButton.textColor),
+                ? IOSDownloadButton.bgColor
+                : IOSDownloadButton.textColor),
             value: _isPreparing ? null : value,
           );
         },
