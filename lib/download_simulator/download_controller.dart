@@ -36,7 +36,6 @@ class SimulatedDownloadController extends DownloadController
   DownloadStatus _status;
   double _progress;
   VoidCallback _onOpen; // action performed after download is ready
-  final _pauses = _random.nextInt(5) + 2;
 
   @override
   DownloadStatus get status => _status;
@@ -53,10 +52,11 @@ class SimulatedDownloadController extends DownloadController
 
   // generate random sequential [values] between 0.0 and 1.0 based on [_pauses]
   List<double> get _milestones {
+    final _pauses = _random.nextInt(5) + 2;
     var values = List<double>.filled(_pauses + 2, 0, growable: false);
-    var prev = 0.0, limit = 1.0 / _pauses;
+    var prev = 0.0, limit = 1.0 / (_pauses + 1);
     for (var i = 1; i <= _pauses; i++) {
-      var curr = prev + _random.nextDouble() * limit;
+      var curr = prev + limit;
       values[i] = curr;
       prev = curr;
     }
