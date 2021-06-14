@@ -20,12 +20,14 @@ class Info {
 }
 
 class LottieDownloadButton extends StatefulWidget {
+  final Size size;
   final DownloadStatus status;
   final double progress;
   final VoidCallback onStart, onCancel, onOpen, onReset;
 
   const LottieDownloadButton({
     Key? key,
+    this.size = const Size(300, 300),
     required this.status,
     required this.progress,
     required this.onStart,
@@ -103,6 +105,7 @@ class _LottieDownloadButtonState extends State<LottieDownloadButton>
       onTap: onPressed,
       onLongPress: onLongPressed,
       child: LottieProgressPainter(
+        size: widget.size,
         composition: composition,
         progress: _controller,
       ),
@@ -127,9 +130,9 @@ class LottieProgressPainter extends AnimatedWidget {
 
   const LottieProgressPainter({
     Key? key,
+    required this.size,
     required this.composition,
     required Animation<double> progress,
-    this.size = const Size(300, 300),
   }) : super(key: key, listenable: progress);
 
   @override
