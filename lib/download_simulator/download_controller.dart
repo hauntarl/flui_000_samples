@@ -17,6 +17,7 @@ abstract class DownloadController implements ChangeNotifier {
   void start();
   void cancel();
   void open();
+  void reset();
 }
 
 // to simulate random behavior for progress and pause duration
@@ -86,15 +87,18 @@ class SimulatedDownloadController extends DownloadController
 
   @override
   void cancel() {
-    if (_status == DownloadStatus.fetching) {
-      _progress = 0;
-      _status = DownloadStatus.cancelled;
-      notifyListeners();
-    }
+    if (_status == DownloadStatus.fetching) reset();
   }
 
   @override
   void open() {
     if (status == DownloadStatus.downloaded) _onOpen();
+  }
+
+  @override
+  void reset() {
+    _progress = 0;
+    _status = DownloadStatus.cancelled;
+    notifyListeners();
   }
 }
