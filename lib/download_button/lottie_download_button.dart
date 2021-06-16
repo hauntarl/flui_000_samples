@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_samples/download_simulator/download_controller.dart';
+import 'package:flutter_samples/lottie_transition/lottie_transition.dart';
 import 'package:lottie/lottie.dart';
 
 class Info {
@@ -42,23 +42,16 @@ class LottieDownloadButton extends StatefulWidget {
 
 class _LottieDownloadButtonState extends State<LottieDownloadButton>
     with SingleTickerProviderStateMixin {
-  late final Future<LottieComposition> _composition;
   late final AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
 
-    _composition = _loadComposition();
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 5),
     );
-  }
-
-  Future<LottieComposition> _loadComposition() async {
-    final data = await rootBundle.load(Info.filePath);
-    return await LottieComposition.fromByteData(data);
   }
 
   @override
@@ -104,10 +97,10 @@ class _LottieDownloadButtonState extends State<LottieDownloadButton>
     return GestureDetector(
       onTap: onPressed,
       onLongPress: onLongPressed,
-      child: LottieProgressPainter(
-        size: widget.size,
+      child: LottieTransition(
+        animation: _controller,
         composition: composition,
-        progress: _controller,
+        size: widget.size,
       ),
     );
   }
@@ -115,57 +108,11 @@ class _LottieDownloadButtonState extends State<LottieDownloadButton>
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<LottieComposition>(
-      future: _composition,
+      future: AssetLottie(Info.filePath).load(),
       builder: (_, snapshot) {
         final composition = snapshot.data;
         return composition != null ? _buildButton(composition) : Container();
       },
     );
-  }
-}
-
-class LottieProgressPainter extends AnimatedWidget {
-  final LottieComposition composition;
-  final Size size;
-
-  const LottieProgressPainter({
-    Key? key,
-    required this.size,
-    required this.composition,
-    required Animation<double> progress,
-  }) : super(key: key, listenable: progress);
-
-  @override
-  Widget build(BuildContext context) {
-    final progress = listenable as Animation<double>;
-    return CustomPaint(
-      size: size,
-      painter: LottieFramePainter(
-        composition: composition,
-        progress: progress.value,
-      ),
-    );
-  }
-}
-
-class LottieFramePainter extends CustomPainter {
-  final LottieDrawable drawable;
-  final double progress;
-
-  LottieFramePainter({
-    required LottieComposition composition,
-    required this.progress,
-  }) : drawable = LottieDrawable(composition);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    drawable
-      ..setProgress(progress)
-      ..draw(canvas, Offset.zero & size);
-  }
-
-  @override
-  bool shouldRepaint(covariant LottieFramePainter oldDelegate) {
-    return oldDelegate.progress != progress;
   }
 }
