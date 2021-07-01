@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import './color_picker.dart';
+import '../color_picker.dart';
 import './sliver_header.dart';
 
 double Function(double) _offsetAccumulator() {

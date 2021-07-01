@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_samples/slivers_demo/color_picker.dart';
+import 'package:flutter_samples/color_picker.dart';
 
 void main() => runApp(AnimatedListDemo());
 
